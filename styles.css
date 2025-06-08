@@ -1,0 +1,61 @@
+/* styles.css */
+
+/* Utility classes */
+.active {
+    color: var(--bs-blue);
+}
+
+/* Header bar */
+header {
+    background-color: var(--bs-secondary-bg);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    height: 50px;
+}
+header div {
+    display: flex;
+    padding: 0 12px;
+    gap: 12px;
+    font-size: 1.5rem;
+    z-index: 1;
+}
+header h1 {
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  margin: 0;
+  font-size: 1.25rem;
+  font-weight: 600;
+  z-index: 0;
+  white-space: nowrap;
+}
+
+/* Nav bar */
+nav {
+    position: fixed;
+    bottom: 0;
+    background-color: var(--bs-secondary-bg);
+    display: flex;
+    width: 100%;
+    justify-content: space-around;
+}
+nav div {
+    text-align: center;
+    padding-top: 5px;
+    padding-bottom: 5px;
+}
+nav div .bi {
+    font-size: 1.5rem;
+}
+nav div p {
+    margin: 0;
+}
+@media only screen and (max-width: 400px) {
+    nav div .bi {
+        font-size: 1.75rem;
+    }
+    nav div p {
+        display: none;
+    }
+}
