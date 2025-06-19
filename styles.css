@@ -1,49 +1,182 @@
 /* styles.css */
+/* TODO: more CSS vars for greater card flexibility */
+/* TODO: default <a> styles */
 
-/* Utility classes */
-.active {
-    color: var(--bs-blue);
+
+/* Global Variables */
+:root {
+    --system-ui: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen-Sans, Ubuntu, Cantarell, "Helvetica Neue", "Noto Sans", "Liberation Sans", Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+    --system-mono: SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+    --header-margin: 15px;
+    --main-margin: 30px;
+    --responsive-margin: 4vw;
+    --card-height: 140px;
+    --button-width: 300px;
 }
 
+
+/* Light Mode Theme */
+[data-theme=light] {
+    --bg-color: #fafafa;
+    --bg-color-rgb: 250, 250, 250;
+    --text-color: #282828;
+    --text-em-color: #000000;
+    --text-subtle-color: #919191;
+    --active-color: #28cd19;
+    --card-bg-color: #e6e6e6;
+    --button-bg-color: #e6e6e6;
+    --button-text-color: #28cd19;
+    --button-bg-color-hover: #dbdbdb;
+    --button-text-color-hover: #28cd19;
+    --glossy-backdrop: blur(25px);
+    --glossy-background: rgba(var(--bg-color-rgb), 0.6);
+}
+
+
+/* Dark Mode Theme */
+[data-theme=dark] {
+    --bg-color: #0a0a0a;
+    --bg-color-rgb: 5, 5, 5;
+    --text-color: #d7d7d7;
+    --text-em-color: #ffffff;
+    --text-subtle-color: #727272;
+    --active-color: #b9fa4b;
+    --card-bg-color: #191919;
+    --button-bg-color: #191919;
+    --button-text-color: #b9fa4b;
+    --button-bg-color-hover: #2d2d2d;
+    --button-text-color-hover: #b9fa4b;
+    --glossy-backdrop: blur(25px);
+    --glossy-background: rgba(var(--bg-color-rgb), 0.4);
+}
+
+
+/* Resets */
+*, *::before, *::after {
+    box-sizing: border-box;
+}
+@media (prefers-reduced-motion: no-preference) {
+    :root {
+        scroll-behavior: smooth;
+    }
+}
+body {
+    margin: 0;
+    padding-bottom: 80px;
+    font-size: 1rem;
+    line-height: 1.5;
+    font-family: var(--system-ui);
+    color: var(--text-color);
+    background-color: var(--bg-color);
+}
+h1, h2, h3, h4, h5, h6 {
+    margin-top: 0;
+    margin-bottom: 0.5rem;
+    font-weight: 500;
+    line-height: 1.2;
+    color: var(--text-em-color);
+}
+h1 {
+    font-size: min(2.5rem, calc(1.375rem + 1.5vw));
+}
+h2 {
+    font-size: min(2rem, calc(1.325rem + 0.9vw));
+}
+h3 {
+    font-size: min(1.75rem, calc(1.3rem + 0.6vw));
+}
+h4 {
+    font-size: min(1.5rem, calc(1.275rem + 0.3vw));
+}
+h5 {
+    font-size: 1.25rem;
+}
+h6 {
+    font-size: 1rem;
+}
+p {
+  margin-top: 0;
+  margin-bottom: 1rem;
+}
+hr {
+  margin: 1rem 0;
+  color: inherit;
+  border: 0;
+  border-top: 1px solid;
+  opacity: 0.25;
+}
+button {
+    cursor: pointer;
+    border: none;
+}
+img, video, iframe {
+    max-width: 100%;
+    height: auto;
+}
+.clearfix::after {
+  content: "";
+  clear: both;
+  display: table;
+}
+@supports (display: flow-root) {
+    .clearfix {
+        display: flow-root;
+    }
+}
+[hidden] {
+    display: none !important;
+}
+
+
+/* Base Styles */
 /* Header bar */
 header {
-    background-color: var(--bs-secondary-bg);
     display: flex;
+    position: sticky;
+    top: 0;
     justify-content: space-between;
-    align-items: center;
-    height: 50px;
+    backdrop-filter: var(--glossy-backdrop);
+    background-color: var(--glossy-background);
+    margin-top: var(--header-margin);
+    padding: 5px var(--header-margin) 0;
 }
-header div {
-    display: flex;
-    padding: 0 12px;
-    gap: 12px;
-    font-size: 1.5rem;
-    z-index: 1;
+@media (min-width: 480px) {
+    header {
+        padding-left: calc(var(--header-margin) + var(--responsive-margin));
+        padding-right: calc(var(--header-margin) + var(--responsive-margin));
+    }
 }
-header h1 {
-  position: absolute;
-  left: 50%;
-  transform: translateX(-50%);
-  margin: 0;
-  font-size: 1.25rem;
-  font-weight: 600;
-  z-index: 0;
-  white-space: nowrap;
+header .bi {
+    font-size: 1.75rem;
 }
-
+header time {
+    text-transform: uppercase;
+    font-weight: 600;
+    color: var(--text-subtle-color);
+}
+/* App content */
+main {
+    margin: 0 var(--main-margin);
+}
+@media (min-width: 480px) {
+    main {
+        margin-left: calc(var(--main-margin) + var(--responsive-margin));
+        margin-right: calc(var(--main-margin) + var(--responsive-margin));
+    }
+}
 /* Nav bar */
 nav {
     position: fixed;
     bottom: 0;
-    background-color: var(--bs-secondary-bg);
     display: flex;
     width: 100%;
     justify-content: space-around;
+    backdrop-filter: var(--glossy-backdrop);
+    background-color: var(--glossy-background);
 }
 nav div {
     text-align: center;
-    padding-top: 5px;
-    padding-bottom: 5px;
+    padding: 5px 0;
 }
 nav div .bi {
     font-size: 1.5rem;
@@ -51,11 +184,94 @@ nav div .bi {
 nav div p {
     margin: 0;
 }
-@media only screen and (max-width: 400px) {
+@media (max-width: 480px) {
     nav div .bi {
         font-size: 1.75rem;
     }
     nav div p {
         display: none;
     }
+}
+
+
+/* Utility Classes */
+/* .card and .card-container for tiled, customizable cards */
+.card-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    grid-auto-rows: var(--card-size);
+    gap: 16px;
+    padding: 16px;
+    justify-content: center;
+}
+.card {
+    padding: 10px;
+    border-radius: 10px;
+    background-color: var(--card-bg-color);
+    overflow: hidden;
+    grid-column: span 1;
+    grid-row: span 1;
+}
+/* Three size classes for .card or grid layouts */
+.size-sm {
+    grid-column: span 1;
+    grid-row: span 1;
+}
+.size-md {
+    grid-column: span 2;
+    grid-row: span 1;
+}
+.size-lg {
+    grid-column: span 2;
+    grid-row: span 2;
+}
+/* .button-stack for button containers */
+.button-stack {
+    margin: 0 auto;
+    width: var(--button-width);
+}
+/* .button for actual buttons or hyperlinks */
+.button {
+    display: inline-block;
+    text-align: center;
+    text-decoration: none;
+    width: 100%;
+    max-width: var(--button-width);
+    height: 3rem;
+    line-height: 3rem;
+    font-size: 1rem;
+    font-weight: 700;
+    font-family: var(--system-ui);
+    border-radius: 10px;
+    margin-bottom: 10px;
+    background-color: var(--button-bg-color);
+    color: var(--button-text-color);
+    transition-duration: 0.2s;
+}
+.button:hover {
+    background-color: var(--button-bg-color-hover);
+    color: var(--button-text-color-hover);
+}
+.button:active {
+    background-color: var(--button-bg-color-hover);
+    color: var(--button-text-color-hover);
+}
+/* .center for quick alignment */
+.center {
+    text-align: center;
+    margin: 0 auto;
+    width: fit-content;
+}
+/* .active to use theme colors for emphasis */
+.active {
+    color: var(--active-color);
+}
+/* .clickable for hover behavior */
+.clickable {
+    cursor: pointer;
+    opacity: 100%;
+    transition: opacity 0.25s;
+}
+.clickable:hover {
+    opacity: 75%;
 }

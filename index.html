@@ -7,30 +7,65 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     
     <!-- Title -->
-    <title>Pocket Cash</title>
+    <title>Stash</title>
 
     <!-- Bootstrap icons -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.13.1/font/bootstrap-icons.min.css">
 
     <!-- CSS -->
-    <link rel="stylesheet" href="reboot.css">
     <link rel="stylesheet" href="styles.css">
 
+    <!-- JavaScript -->
+    <script src="app.js" defer></script>
+
 </head>
-<body data-bs-theme="light">
+<body data-theme="light">
     
+    <!-- TODO: move current header code into home screen, and make new header that fades in on scrolldown -->
     <!-- Header -->
     <header>
-        <div></div>
-        <h1>Home</h1>
         <div>
-            <i class="bi bi-gear"></i>
+            <time class="js-date">{day}, {month} {date}</time>
+            <h1>Home</h1>
+        </div>
+        <div>
+            <i class="bi bi-gear" onclick="setColorMode(Math.random() < 0.5 ? 'light' : 'dark');"></i>
         </div>
     </header>
 
-    <!-- Stuff to delete -->
-    <h1>Pocket Cash</h1>
-    <p>You have $45, yay</p>
+    <!-- App content -->
+    <main id="app-container">
+
+        <!-- Home screen -->
+        <template id="screen-home">
+            <div class="card-container">
+                <div class="card size-md">
+                    <h3>Pocket Cash</h3>
+                    <hr>
+                    <p>$450</p>
+                </div>
+            </div>
+            <div class="button-stack">
+                <button class="button">Edit Cards</button>
+                <button class="button">View All</button>
+            </div>
+            <p>This is an <a class="button" href="#home">example link</a>.</p>
+        </template>
+
+        <!-- Error screen -->
+        <template id="screen-404">
+            <h2 class="center">Error 404</h2>
+            <br>
+            <p class="center"><strong>Page not found</strong></p>
+            <br><br>
+            <p class="center">Something happened, and it was bad 😕. Try <a onclick="history.back();" href="/">going back</a> or <a href="#home">going home</a>.</p>
+        </template>
+
+        <div id="app">
+            <!-- Content here is loaded dynamically via app.js -->
+        </div>
+
+    </main>
 
     <!-- Nav bar -->
     <nav>
@@ -51,9 +86,6 @@
             <p>Assistant</p>
         </div>
     </nav>
-
-    <!-- JavaScript -->
-    <script src="app.js"></script>
 
 </body>
 </html>
